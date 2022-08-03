@@ -1,0 +1,9 @@
+.button{
+	-fx-background-color: transparent;
+}
+
+.button:hover{
+    	-fx-border-insets:0,0,0,10;
+	    -fx-border-color:#2196f3;
+	    -fx-border-width:10;
+}
