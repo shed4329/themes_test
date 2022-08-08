@@ -1,10 +1,11 @@
-import impl.jfxtras.styles.jmetro.ToggleSwitchSkin;
 import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -18,6 +19,7 @@ import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 import org.controlsfx.control.ToggleSwitch;
 
+import java.awt.*;
 import java.io.File;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -259,12 +261,20 @@ public class testOne extends Application {
                     File file = fileChooser.showOpenDialog(stage);
                     if (file.exists()&&file.isFile()){
                         System.out.println(file.getPath());
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("OK");
                         alert.setHeaderText("set cursor ok");
                         alert.setContentText("cursor image path:"+file.getPath());
 
                         alert.showAndWait();
+
+                         */
+                        try {
+                            Notification notification = new Notification();
+                            notification.displayTray();
+                        } catch (AWTException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                 });
             });
@@ -330,7 +340,7 @@ public class testOne extends Application {
                 viewSetting.setStyle("-fx-background-color:#afd0ec");
                 compressSetting.setStyle("-fx-background-color:transparent");
                 extractSetting.setStyle("-fx-background-color:transparent");
-                Text text2 = new Text("为节约资源关闭预览\n");
+                Text text2 = new Text("为节约资源关闭预览");
                 ToggleSwitch viewAbleSwitch = new ToggleSwitch();
                 VBox vBox2 = new VBox();
                 vBox2.setLayoutX(125);
@@ -339,6 +349,6 @@ public class testOne extends Application {
                 anchorPane.getChildren().add(vBox2);
             });
         });
-
+        stage.setOnCloseRequest(event -> testTwo.setSettingTime(0));
     }
 }
